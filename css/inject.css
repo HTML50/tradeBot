@@ -1,0 +1,69 @@
+.dict-box {
+    user-select: none;
+    background: #fff;   
+    z-index:2147483647;
+    position: fixed;
+    width: 330px;
+    transform: scale(0);
+    opacity: 0;
+    display: none;
+    height:auto;
+    transition: transform 0.2s cubic-bezier(0.46, 1.4, 0.84, 1.03),box-shadow 0.2s ease-out,opacity 0.2s cubic-bezier(0, 1.15, 1, 1);
+}
+
+.show-dictBox {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+    opacity: 1;
+}
+
+#dictBoxBar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background: #eee;
+    width: 100%;
+    height: 42px;
+    cursor: move;
+    user-select: none;
+}
+
+.no-select{
+    user-select: none;
+}
+
+.pointer-events{
+    pointer-events: none;
+}
+
+.pinned {
+    transform: rotateZ(-45deg);
+}
+.not-pinned {
+    padding: 5px;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+}
+.no-border{
+ border: none;
+}
+
+
+.close{
+    cursor: pointer;
+    opacity: 0.3;
+    padding: 10px; 
+    transition: opacity 0.3s;
+}
+
+.close:hover{
+    cursor: pointer;
+    opacity: 0.8;
+    padding-right: 10px; 
+}
+
+#injectedResultBox {
+    width: 100%;
+    border: none;
+    transition: height 0.3s ease;
+}

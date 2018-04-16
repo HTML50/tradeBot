@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<head>
+  <title>dict</title>
+</head>
+<style type="text/css">
+@font-face {
+  font-family: 'Ubuntu';
+  src: url("css/ubuntu.woff2") format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  width: 400px;
+}
+
+.control{
+      padding: 30px;
+    font-size: 16px;
+    color: #1f1d1d;
+}
+
+.control div{
+  margin: 5px;
+}
+
+.control input{
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+}
+
+#btn{
+border: none;
+    background: #2a9e0d;
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.center{
+  text-align: center;
+}
+
+.integer-input{
+  width: 50px;
+}
+
+.advance{
+  font-size: 12px;
+  text-align: right;
+}
+</style>
+
+<body>
+
+<div class="control">
+
+<div>
+  总量：  <input type="text" />
+</div>
+
+<div>
+  随机价格范围：
+  <input type="text" class="integer-input" />  - <input type="text" class="integer-input"  />
+</div>
+
+<div>
+  单笔交易量范围：
+  <input type="text" class="integer-input"  />  - <input type="text" class="integer-input"  />
+</div>
+
+<div>
+  随机价格范围：
+  <input type="range" />
+</div>
+
+
+<div class="advance">高级设置</div>
+<div class="center">
+<button id="btn">开始</button>
+</div>
+
+
+</div>
+<!-- 
+<input type="file"  multiple="multiple" name="" id="file" class="file-up-load-1" title="add to songlist"/> -->
+<script src="js/popup.js"></script>
+</body>
+
+</html>

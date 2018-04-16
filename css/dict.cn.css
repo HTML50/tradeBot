@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+#header,
+#dshared,
+#footer,
+#adContent,
+.sidenav,
+.righter,
+.wordbook,
+.shape,
+#dict-chart-basic,
+.section,
+.copyright {
+    display: none !important;
+}
+
+#content {
+    padding:0 20px !important;
+    margin: 0 !important;
+}
+
+.main {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
