@@ -1,12 +1,13 @@
-# tradeHelper
-a tool for auto trading.
+# tradeBot
+a Chrome extension for auto trading (on coinegg)
 
 
 
-# Usage
+# 安装方法
 
-1. 下载coinegg.js
-2. 修改文件顶部 `priceHigh`,`priceLow`,`theLevel`,`thePoint`,`randomSecond`和 `totalAmount`这几个值。
-3. 复制全部代码到Chrome浏览器F12的console下，执行。
+1. 以ZIP形式下载项目。
+2. 解压缩，将tradeBot文件夹拖入到`chrome://extensions/`，完成安装。
+3. 安装另一个谷歌扩展`Allow-Control-Allow-Origin: *`。
+4. 打开coinegg，登录后，点击右上角新安装的tradeBot运行。
 
 

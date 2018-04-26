@@ -6,10 +6,11 @@
   <title>dict</title>
 </head>
 <style type="text/css">
-@font-face {
-  font-family: 'Ubuntu';
-  src: url("css/ubuntu.woff2") format('woff2');
-}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background-color:#666}
+::-webkit-scrollbar-thumb{background-color:#ccc}
+::-webkit-scrollbar-thumb:hover{background-color:#ffe}
+::-webkit-scrollbar-thumb:active{background-color:#ffe}
 
 * {
   margin: 0;
@@ -17,23 +18,31 @@
 }
 
 body{
-  width: 400px;
+  width: 420px;
+}
+
+.bar-header{
+    background-color: #444;
+    border-color: #111;
+    color: #fff;
+    padding: 10px;
+    user-select: none;
 }
 
 .control{
-      padding: 30px;
+    padding: 10px;
     font-size: 16px;
     color: #1f1d1d;
-}
-
-.control div{
-  margin: 5px;
+    background: #f5f5f5;
+    user-select: none;
 }
 
 .control input{
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #d4d4d4;
   outline: none;
+  font-size: 14px;
+  text-align: center;
 }
 
 #btn{
@@ -48,47 +57,371 @@ border: none;
   text-align: center;
 }
 
-.integer-input{
-  width: 50px;
+.amount-range{
+  width: 80px;
 }
 
-.advance{
-  font-size: 12px;
-  text-align: right;
+.time-range{
+  width: 40px;
+}
+
+.level-input{
+  width: 45px;
+}
+
+.after-ele::after{
+      margin-left: 5px;
+    content: '%';
+    color: #8e8e8e;
+    font-size: 12px;
+}
+.no-arrow::-webkit-outer-spin-button,
+.no-arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+.random-price{
+  width: 120px;
+}
+
+.bar{
+margin: 0.6em auto 0 auto;
+    padding: 1rem 2rem 1rem 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, .3);
+    transition: all 0.2s linear;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bar:hover{
+    box-shadow: 0 10px 15px -5px #a0a0a0;
+}
+
+
+.title{
+  font-size: 14px;
+  font-weight: 900;
+
+}
+
+.label{
+      font-size: 14px;
+    margin: 0 10px;
+
+}
+.bracket{
+  color:#d4d4d4;
+  font-size: 14px;
+}
+
+
+/*苹果开关css*/
+/************************************************/
+.ios-checkbox-label{
+    display: inline-block;
+    width: 51px;
+    height: 23px;
+    border-radius: 50px;
+    box-shadow: inset 0 0 0 2px #E4E4E4;
+    margin: 10px 30px;
+    transition: all 0.4s;
+    cursor: pointer;
+    text-align: -webkit-auto;
+}
+.ios-checkbox{
+  display: none;
+}
+
+i{
+  height: 20px;
+  width: 20px;
+  background: #FFF;
+  display: inline-block;
+  border-radius: 60px;
+  margin-top: 1px;
+  margin-left: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 0 0 1px #E4E4E4, 0 3px 2px rgba(0,0,0,0.25);
+  pointer-events:none;
+}
+
+.ios-checkbox:checked+label>i{
+  margin-left: 29px;
+  box-shadow:0 3px 2px rgba(0,0,0,0.25);
+}
+.ios-checkbox-label:active{
+  box-shadow: inset 0 0 0 20px #E4E4E4;
+}
+.ios-checkbox-label:active>i{
+  width: 34px;
+}
+.ios-checkbox:checked+label:active>i{
+  margin-left: 13px;
+}
+.ios-checkbox:checked+label{
+  box-shadow: inset 0 0 0 20px #53D769;
+  border: none;
+}
+/************************************************/
+
+
+.hidden{
+  opacity: 0;
+}
+
+#randomLevelArea{
+   transition: all .4s linear;
+}
+
+.slide{  
+  -webkit-appearance: none;/*清除系统默认样式*/  
+  width: 100%;  
+  background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat, #e82b2b;/*设置左边颜色为#61bd12，右边颜色为#ddd*/  
+  background-size: 50% 100%;/*设置左右宽度比例*/  
+  height: 3px;/*横条的高度*/  
+  min-width: 200px;
+} 
+
+#integerOrDecimal{
+  background: -webkit-linear-gradient(#000000, #000000) no-repeat, #d2d0d0;
+}
+
+/*拖动块的样式*/  
+.slide::-webkit-slider-thumb {  
+  -webkit-appearance: none;/*清除系统默认样式*/  
+  height: 26px;/*拖动块高度*/  
+  width: 26px;/*拖动块宽度*/  
+  background: #fff;/*拖动块背景*/  
+  border-radius: 50%; /*外观设置为圆形*/  
+  border: solid 1px #ddd; /*设置边框*/
+  cursor: pointer;
+} 
+
+
+.tip{
+font-size: 12px;
+    color: #a0a0a0;
+}
+
+
+.high{
+  color: #02a009;
+}
+
+.low{
+  color: #dc1212;
+}
+
+.flex-left{
+  display: flex;
+    align-items: center;
+    align-self: flex-start;
+        text-align: -webkit-right;
+}
+
+.flex-column{
+  flex-direction: column;
+}
+
+.flex-spacebetween{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-spacearound{
+  display: flex;
+  justify-content: space-around;
+}
+
+.margin-bottom10{
+  margin-bottom: 10px;
+}
+
+.margin-top20{
+  margin-top: 20px;
+}
+
+
+
+.button{
+border: 0 none;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #4a4a4a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btnStart:hover{
+  background: #02a009;
+  color:#fff;
+}
+
+#btnStop:hover{
+  background: #dc1212;
+  color:#fff;
+}
+
+
+.bottom{
+    padding: 9px;
+    display: flex;
+    justify-content: space-around;
+    background: #c3c3c3;
+}
+
+
+#randomLevelTip{
+  width: 90px;
+}
+
+
+.error{
+  color:#fff;
+  background: red;
+  animation: flash 1s infinite;
+}
+
+@keyframes flash{
+0% {
+    opacity: 0;
+}
+
+50% {
+    opacity: 1;
+}
+
+100% {
+    opacity: 0;
+}
 }
 </style>
 
 <body>
 
+<div class="bar-header center">
+  <h1>tradeBot</h1>
+</div>
+
+
 <div class="control">
 
+<div class="bar flex-spacebetween">
+  <div class="title">任务总量</div> 
+  <div>
+  <div class=""><input id="amount" type="text" value="500000" /></div>
+  <div id="amountTip" class="tip center"></div>
+  </div>
+</div>
+
+<div class="bar">
+<div class="flex-column">
+  <div class="title">随机价格范围</div>
+  <div id="priceTip" class="tip center"></div>
+  </div>
+  <div>
+  <div>
+  <span class="label">最高：</span><input id="high" type="text" class="random-price high" value="0.5" /> 
+  </div>
+  <div>
+  <span class="label">最低：</span><input id="low" type="text" class="random-price low"  value="1" />
+  </div>
+  </div>
+</div>
+
+
+<div class="bar">
+  <div class="title">随机间隔时间范围（秒）</div>
+   <div><span class="bracket">[ <input id="timeLow" type="number" class="time-range no-arrow" value="15" />,<input id="timeHigh" type="number" class="time-range no-arrow"  value="30"/> ]</span>
+   </div>
+   <div></div>
+   </div>
+
+<div class="bar flex-column">
+
+  <div class="flex-spacebetween">
+  <div class="title">单笔交易量区间</div>
+
+  <div>
+   <div><span class="bracket">[ <input id="min" type="number" class="amount-range no-arrow" value="1000" />,<input id="max" type="number" step="1000" class="amount-range no-arrow"  value="100000"/> ]</span></div>
+   <div class="flex-spacearound">
+   <div id="minTip" class="tip center"></div>
+  <div id="maxTip" class="tip center"></div>
+  </div>
+</div>
+   </div>
+
+<div class="flex-spacebetween">
+  <div class="title">单笔交易量概率设定</div>
+
 <div>
-  总量：  <input type="text" />
+  <input class="ios-checkbox" type="checkbox" id="randomLevelSwitch">
+  <label class="ios-checkbox-label" for="randomLevelSwitch"><i></i></label>
+  </div>
+
+  <div id="randomLevelTip" class="tip center"></div>
 </div>
 
-<div>
-  随机价格范围：
-  <input type="text" class="integer-input" />  - <input type="text" class="integer-input"  />
-</div>
-
-<div>
-  单笔交易量范围：
-  <input type="text" class="integer-input"  />  - <input type="text" class="integer-input"  />
-</div>
-
-<div>
-  随机价格范围：
-  <input type="range" />
-</div>
-
-
-<div class="advance">高级设置</div>
-<div class="center">
-<button id="btn">开始</button>
-</div>
-
+  <div class="hidden flex-column flex-left" id="randomLevelArea"></div>
 
 </div>
+
+<div class="bar flex-column">
+  <div class="title margin-bottom10">单笔交易整数/小数随机比例</div>
+  <div class="flex-spacebetween">
+
+     <div>
+     <div class="label">整数</div>
+     <div id="integerTip" class="label"></div>
+     </div>
+
+     <div><input type="range" class="slide" id='integerOrDecimal' max="1" min="0" step="0.01" /></div>
+     
+    <div>
+     <div class="label">小数</div>
+     <div id="decimalTip"class="label"></div>
+     </div>
+</div></div>
+
+<div class="bar flex-column">
+  <div class="title margin-bottom10">随机买卖比例</div>
+  <div class="flex-spacebetween">
+
+
+  <div>
+  <div class="label">买</div>
+  <div id="buyTip" class="label"></div>
+  </div>
+
+
+  <div><input type="range" class="slide"  id='buyOrSell' max="1" min="0" step="0.01" /></div>
+
+  <div>
+  <div class="label">卖</div>
+  <div id="sellTip" class="label"></div>
+  </div>
+</div>
+</div>
+
+<!--
+<div class="bar">
+  <div class="title">高级设置</div>
+</div>
+-->
+</div>
+
+<div class="bottom">
+<button id="btnStart" class="button">开始</button>
+<button id="btnStop" class="button">停止</button>
+</div>
+
+
+
 <!-- 
 <input type="file"  multiple="multiple" name="" id="file" class="file-up-load-1" title="add to songlist"/> -->
 <script src="js/popup.js"></script>
