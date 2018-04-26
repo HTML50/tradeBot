@@ -36,11 +36,11 @@ var ajaxSell = 'sell'
 //买卖函数
 function sell(){
     vital('卖出')
-    //location.href="javascript:tradeadd('sell'); void 0";
+    location.href="javascript:tradeadd('sell'); void 0";
 }
 function buy(){
     vital('买入')
-    //location.href="javascript:tradeadd('buy'); void 0";
+    location.href="javascript:tradeadd('buy'); void 0";
 }
 
 
