@@ -135,6 +135,17 @@ randomLevelSwitch.addEventListener('change', function() {
 })
 
 
+advanced.addEventListener('change', function() {
+
+    console.log(this.checked)
+    if (this.checked) {
+        advancedSetting.classList.remove('none')
+    } else {
+        advancedSetting.classList.add('none')
+    }
+
+})
+
 //--------------------------------------------函数--------------------------------------------
 //===============================================================================================
 
@@ -344,7 +355,10 @@ function start() {
             'randomLevel':randomLevelSwitch.checked,
             'oddsInteger':integerOrDecimal.value,
             'oddsBuy':buyOrSell.value,
-            'oddsLevel': oddsLevel
+            'oddsLevel': oddsLevel,
+            'advanced': advanced.checked,
+            'mode':mode.value,
+            'safeSpeed':safeTime.value
         }
 
         sendMessageToContentScript({ cmd: 'start',  value:paramsObj}, function(response) {
