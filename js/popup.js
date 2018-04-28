@@ -42,7 +42,7 @@ chrome.tabs.query({ active: true }, function(tabsArr) {
 
 btnStart.onclick = start;
 btnStop.onclick = stop;
-
+errorMsg.onclick = closeMsg
 
 //总量
 //--------------------------------------------------------
@@ -119,7 +119,7 @@ randomLevelSwitch.addEventListener('change', function() {
             randomLevelArea.classList.remove('hidden')
             this.value = 'on'
         } else {
-            alert('单一数量级，无需设定概率')
+            msg('随机区间没有级差，无需设定概率')
             this.value = 'off'
             this.checked = false
         }
@@ -292,8 +292,31 @@ function storeOddsLevel(level, value) {
 //开始前，检查安全性
 function checkVal() {
     var levelOdds = true,
-        valueCorrect = true;
+        valueCorrect = true,
+        errorMsg = '';
 
+
+
+
+    if(min.value === "" || max.value === "" || high.value === "" || low.value === "" || amount.value === ""){
+        valueCorrect = false;
+        errorMsg += '# 值不能为空\n'
+    }
+    if(min.value === "") {
+        addError(min)
+    }
+    if(max.value === "") {
+        addError(max)
+    }
+    if(high.value === "") {
+        addError(high)
+    }
+    if(low.value === "") {
+        addError(low)
+    }
+    if(amount.value === "") {
+        addError(amount)
+    }
 
     //概率和为1
     if (randomLevelSwitch.checked) {
@@ -301,25 +324,39 @@ function checkVal() {
         for (i in oddsLevel) {
             percent += Number(oddsLevel[i])
         }
-        console.log(percent)
+        console.log('概率总和',percent)
         if(percent !== 100){
-         flash(randomLevelTip,'概率总和应该等于100%')
+          errorMsg += '# 概率总和应该等于100%\n'
+          addError(randomLevelArea)
           valueCorrect = false;
         }
     }
 
 
     if (Number(low.value) > Number(high.value)) {
-        flash(priceTip,'最低价不能高于最高 → ')
+        addError(low)
+        errorMsg +='# 价格区间最低价应小于最高价\n'
+        valueCorrect = false;
+    }
+
+  if (Number(timeLow.value) > Number(timeHigh.value)) {
+        addError(timeLow)
+        errorMsg +='# 时间区间左边应小于右边\n'
         valueCorrect = false;
     }
 
     if (Number(min.value) > Number(max.value)) {
-        flash(minTip,'最小值 > 最大值 ? ↑ ↑ ↑  ')
+        addError(min)
+        errorMsg +='# 交易量区间最小值应小于最大值\n'
         valueCorrect = false;
     }
 
-    return valueCorrect
+    if(valueCorrect){
+        return true
+    }else{
+        msg(errorMsg)
+    }
+    
 }
 
 function setSlide(DOM,DOM1,DOM2,val){
@@ -332,14 +369,33 @@ function setSlide(DOM,DOM1,DOM2,val){
 }
 
 
-function flash(DOM,msg){
-         DOM.classList.add('error');
-     DOM.innerHTML = msg
-     setTimeout(function(){
-        DOM.classList.remove('error');
-        if(DOM.innerHTML === msg) DOM.innerHTML ='';
-     },5000)
+function addError(DOM){
+
+     DOM.classList.add('error');
+        setTimeout(function(){
+        DOM.classList.remove('error')
+     },10000)
+
 }
+
+
+function msg(msg){
+     tip.innerText = msg
+     tipDIV.classList.remove('none')
+
+     setTimeout(function(){
+        tipDIV.classList.remove('hidden')
+     },0)
+}
+
+
+function closeMsg(){
+    tipDIV.classList.add('hidden')
+        setTimeout(function(){
+        tipDIV.classList.add('none');
+     },300)
+}
+
 
 //开始按钮
 function start() {
@@ -358,7 +414,8 @@ function start() {
             'oddsLevel': oddsLevel,
             'advanced': advanced.checked,
             'mode':mode.value,
-            'safeSpeed':safeTime.value
+            'safeSpeed':safeTime.value,
+            'debug':debug.checked
         }
 
         sendMessageToContentScript({ cmd: 'start',  value:paramsObj}, function(response) {
@@ -437,7 +494,7 @@ function createDIV(i) {
 
 
     var div = document.createElement('div')
-    div.className = 'after-ele'
+    div.className = 'after-ele item'
     div.innerHTML = '<span class="label">“' + levelToChinese(level) + '”的出现概率：</span>'
     div.appendChild(input)
 
@@ -459,7 +516,10 @@ function levelToChinese(num) {
         10000: '万',
         100000: '十万',
         1000000: '百万',
-        10000000: '千万'
+        10000000: '千万',
+        100000000: '亿',
+        1000000000: '十亿',
+        10000000000: '百亿'
     }
 
     return levelTable[num]

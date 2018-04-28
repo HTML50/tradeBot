@@ -41,25 +41,22 @@ var ajaxSell = 'sell'
 //js hack
 //买卖函数
 function sell(){
-    vital('卖出')
-    //location.href="javascript:tradeadd('sell'); void 0";
+    if(debug) vital('卖出')
+    if(!debug) location.href="javascript:tradeadd('sell'); void 0";
 }
 function buy(){
-    vital('买入')
-    //location.href="javascript:tradeadd('buy'); void 0";
+    if(debug) vital('买入')
+    if(!debug) location.href="javascript:tradeadd('buy'); void 0";
 }
 
 
+
+//高级选项
 //调试开关
-var debug = true;
-
-
-
+var debug = false;
 var isAdvanced =false;
-
-
 //查询交易价格响应速度
-var safeRequestTime = 1200;
+var safeRequestTime = 200;
 
 function  buyAfterSell(){
     sell()
@@ -387,7 +384,6 @@ function safeDataCheck(sell, buy) {
     //这个判断没什么意义，若人为的更改自动产生的数值才会出错。
     //对于资金不足，买入或卖出的数量高于可用资金，也无法作出正确判断。
     // getValue(buyPirceDOM) === getValue(sellPirceDOM) && getValue(sellAmountDOM) === getValue(buyAmountDOM) && getValue(buyPirceDOM) === thePrice && theAmount === getValue(buyAmountDOM)
-    
     if(mode === 1){
 
         //不论如何，若对敲价格在买一卖一之间，先成交一笔
@@ -398,6 +394,7 @@ function safeDataCheck(sell, buy) {
         }
 
     }else{
+
         //不论如何，若对敲价格在买一卖一之间，先成交一笔
         if(buy < Number(thePrice) && sell > Number(thePrice)){
             return true;
@@ -407,15 +404,32 @@ function safeDataCheck(sell, buy) {
      
         if(buy >= Number(priceLow)){
             priceLow = new Big(buy).add(step).toString();
-            if (debug) console.warn('买一升高，自动升高了最低价格为',priceLow)
+            if (debug) console.warn('买一升高，自动升高了最低价格为',buy,priceLow)
             result = false;
         }
 
-        if(sell <= Number(priceHigh)){
-            priceHigh = new Big(sell).sub(step).toString()
-            if (debug) console.warn('卖一降低，自动降低了最高价格为',priceHigh)
+
+         if(buy >= Number(priceHigh)){
+            priceHigh = new Big(sell).sub(step).toString();
+            if (debug) console.warn('对敲范围最高价低于买一价格～～～已经调整为低于卖一些许',sell,priceHigh)
             result = false;
         }
+
+
+        if(sell <= Number(priceLow)){
+            priceLow = new Big(buy).add(step).toString();
+            if (debug) console.warn('对敲范围最低价高于卖一价格～～～已经调整为高于买一些许',buy,priceLow)
+            result = false;
+        }
+
+
+        if(sell <= Number(priceHigh)){
+            priceHigh = new Big(sell).sub(step).toString()
+            if (debug) console.warn('卖一降低，自动降低了最高价格为',sell,priceHigh)
+            result = false;
+        }
+
+
 
         return result;
     }
@@ -501,7 +515,6 @@ function randomOdds(level) {
 
 
     function randomInteger(level) {
-        console.log(level)
         if(!level){
         if (debug) console.warn('完全随机整数')
             var random = Math.round(Math.random() * rangeLevel),
@@ -617,8 +630,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 
 
         if(isAdvanced){
-            safeRequestTime = params.safeSpeed;
-            mode = params.mode;
+            safeRequestTime = Number(params.safeSpeed);
+            mode = Number(params.mode);
+            debug = params.debug;
         }
 
         oddsSell = (100 - oddsBuy*100)/100;
